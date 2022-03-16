@@ -1,319 +1,107 @@
 <template>
   
-  <div class="container">
-    <div class="product" v-if="products">
-      <div v-for="(product, index) of products" :key="index.id">  
-      <div class="product-card">
-        <h2 class="name">Nike Zoom Fly Flyknit</h2>
-        <span class="price">$140.00</span>
-        <a class="popup-btn">Quick View</a>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRueydgLsFumxg1LVnm0-zKEUgnbvHNSO8TGQ&usqp=CAU" class="product-img" alt="">
-      </div>
-      <div class="popup-view">
-        <div class="popup-card">
-          <a><i class="fas fa-times close-btn"></i></a>
-          <div class="product-img">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRueydgLsFumxg1LVnm0-zKEUgnbvHNSO8TGQ&usqp=CAU" alt="">
-          </div>
-          <div class="info">
-            <h2>Nike Zoom Fly Flyknit<br><span>Men's Sport</span></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <span class="price">$ 140.00</span>
-            <a href="#" class="add-cart-btn">Add to Cart</a>
-            <a href="#" class="add-wish">Add to Wishlist</a>
-          </div>
+  <div class="wrap">
+    <div class="card">
+      <div class="card__inner">
+        <div class="card___imagen"><img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MRJ82?wid=572&hei=572&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1570059328172" alt="" width="250"></div>
+        <div class="card__info">
+          <p>Audifonos Beats Pro 🎧</p>
+          <h2>Color: Gris</h2>
+          <p>299$</p>
+          <a href="#" class="button">Add to cart</a>
         </div>
       </div>
-    </div>
     </div>
   </div>
 
 </template>
 
 <script>
-export default {
 
-}
 </script>
 
-<style>
+<style scoped>
 
-.container {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-}
-
-
-.product .product-card {
-  z-index: 1;
-  background: #1d212b;
-  position: relative;
-  width: 300px;
-  height: 400px;
-  margin: 40px;
-  border-radius: 10px;
-}
-
-.product .product-card:before {
-  content: "";
-  background: rgba(255, 255, 255, 0.1);
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.product .product-card .product-img {
-  z-index: 1;
-  position: absolute;
-  max-width: 350px;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.product .product-card .name {
-  z-index: 2;
-  color: #fff;
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  bottom: 130px;
-  font-size: 20px;
-  letter-spacing: 1px;
-}
-
-.product .product-card .price {
-  z-index: 2;
-  color: #fff;
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  bottom: 80px;
-  font-size: 30px;
-  font-weight: 300;
-}
-
-.product .product-card .popup-btn {
-  z-index: 2;
-  color: #fff;
-  background: #555;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 1px;
-  padding: 10px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-/*Styles for popup view*/
-
-.product .popup-view {
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.5);
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.5s;
-}
-
-.product .popup-view.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.product .popup-card {
-  position: relative;
-  display: flex;
-  width: 800px;
-  height: 500px;
-  margin: 20px;
-}
-
-.product .popup-card .product-img {
-  z-index: 2;
-  background: #1d212b;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 45%;
-  height: 90%;
-  transform: translateY(25px);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.product .popup-card .product-img img {
-  z-index: 2;
-  position: relative;
-  width: 450px;
-  left: -50px;
-}
-
-.product .popup-card .info {
-  z-index: 2;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  width: 55%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 40px;
-  border-radius: 10px;
-}
-
-.product .popup-card .close-btn {
-  color: #555;
-  z-index: 3;
-  position: absolute;
-  right: 0;
-  font-size: 20px;
-  margin: 20px;
-  cursor: pointer;
-}
-
-.product .popup-card .info h2 {
-  font-size: 40px;
-  line-height: 20px;
-  margin: 10px;
-}
-
-.product .popup-card .info h2 span {
-  font-size: 15px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.product .popup-card .info h2 {
-  font-size: 40px;
-  line-height: 20px;
-  margin: 10px;
-}
-
-.product .popup-card .info h2 span {
-  font-size: 15px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.product .popup-card .info p {
-  font-size: 15px;
-  margin: 10px;
-}
-
-.product .popup-card .info .price {
-  font-size: 45px;
-  font-weight: 300;
-  margin: 10px;
-}
-
-.product .popup-card .info .add-cart-btn {
-  color: #fff;
-  background: #009dd2;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  margin: 10px auto;
-  padding: 10px 50px;
-  border-radius: 20px;
-}
-
-.product .popup-card .info .add-wish {
-  color: #009dd2;
-  font-size: 16px;
-  text-align: center;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-/*Responsive styles*/
-
-@media (max-width: 900px) {
-  .product .popup-card {
-    flex-direction: column;
-    width: 550px;
-    height: auto;
-  }
-
-  .product .popup-card .product-img {
-    z-index: 3;
+.wrap {
     width: 100%;
-    height: 200px;
-    transform: translateY(0);
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
+    display: flex;
+    justify-content: center;
+}
 
-  .product .popup-card .product-img img {
-    left: initial;
-    max-width: 100%;
-  }
+.card {
+  margin: 22px;
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.418);
+  border-bottom-right-radius: 44px;
+  border-bottom-left-radius: 44px;
+  border-top-right-radius: 44px;
+  border-top-left-radius: 44px;
+  position: relative;
+  transition: 0.5s ease-in-out;
+}
 
-  .product .popup-card .info {
+.card:hover{
+    transform: translateY(15px);
+}
+
+.card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
     width: 100%;
-    height: auto;
-    padding: 20px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
+    height: 254px;
+    background: var(--color-navy);
+    border-top-right-radius: 44px;
+    border-top-left-radius: 44px;
+    transition: 0.5s all;
+    opacity: 0;
 
-  .product .popup-card .info h2 {
-    margin: 20px 5px 5px 5px;
-    font-size: 25px;
-  }
+}
 
-  .product .popup-card .info h2 span {
-    font-size: 10px;
-  }
+.card:hover::before {
+    opacity: 1;
+}
 
-  .product .popup-card .info p {
-    margin: 5px;
-    font-size: 13px;
-  }
 
-  .product .popup-card .info .price {
-    margin: 5px;
-    font-size: 30px;
-  }
+.card__imagen{
+    width: 100%;
+    height: 100px;
+}
 
-  .product .popup-card .info .add-cart-btn {
-    margin: 5px auto;
-    padding: 5px 40px;
-    font-size: 14px;
-  }
+.card__imagen > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-  .product .popup-card .info .add-wish {
-    font-size: 14px;
-  }
+.card__info {
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    padding: 1rem 3rem 0rem 3rem;
+    width: 100%;
+    height: 10rem;
+    line-height: 1.5;
+    background-color: var(--color-navy-opaque);
+    color: var(--color-light);
+    border-bottom-right-radius: 44px;
+    border-bottom-left-radius: 44px;
+}
 
-  .product .popup-card .close-btn {
-    z-index: 4;
-  }
+.card__info p{
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.button {
+    font-style: var(--font-sans);
+    text-decoration: none;
+    color: var(--color-light);
+    background-color: black;
+    padding: 0.6em 4em;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-bottom: 1em;
 }
 
 
