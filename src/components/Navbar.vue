@@ -20,7 +20,7 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/about">Connections</router-link>
           <ul class="navbar__sublinks">
-            <li><router-link to="/">linkedin</router-link></li>
+            <li><router-link to="/admin">Admin</router-link></li>
             <li><router-link to="/">dribbble</router-link></li>
             <li><router-link to="/">behance</router-link></li>
             <li><router-link to="/">codepen</router-link></li>
