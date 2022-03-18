@@ -20,7 +20,7 @@
 			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
 		</div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+            <button type="submit" class="btn3 btn-success btn-lg btn-block">Register Now</button>
         </div>
     </form>
 	<div class="text-center">Already have an account? <router-link to="/login">Sign in</router-link>

@@ -28,7 +28,7 @@
     <label>Image</label>
     <input type="text" class="form-control" v-model="imageUrl" />
 </div>
-<button type="button" class="btn btn-primary" @click="addCategory">
+<button type="button" class="btn btn-primary" @click="editCategory">
     Submit
 </button>
 </form>
@@ -40,9 +40,9 @@
 </template>
 
 <script>
-const axios = require("vue-axios");
+const axios = require("axios");
 
-const sweetalert = require("vue-sweetalert2")
+const sweetalert = require("sweetalert")
 
 export default {
 data() {
@@ -61,6 +61,10 @@ methods: {
             description: this.description,
             imageUrl: this.imageUrl,
         };
+
+
+    const baseURL = "https://final-project-o.herokuapp.com"
+
 
     axios({
         method: "post",

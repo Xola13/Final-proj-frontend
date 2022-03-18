@@ -21,7 +21,7 @@
                             <h4 class="card-title">Life in Brazil</h4>
                            
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur sunt elit. Impedit iste perspiciatis earum voluptatem ad possimus itaque, eum aspernatur, nostrum dignissimos beatae id in illum accusantium adipisicing suscipit sunt doloremque.</p>
-                            <a href="#" class="btn btn-deep-orange btn-md">Read more</a>
+                            <a href="#" class="btn1 btn-deep-orange btn-md">Read more</a>
                         </div>
 
                     </div>
@@ -33,11 +33,8 @@
 </template>
 
 <script>
-export default {
-name: Categorybox,
-props: ["category"],
-methods: {},
-}
+
+
 </script>
 
 <style scoped>

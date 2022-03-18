@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-12 text-center">
 
-            <h3 class="pt-3">Our Categories</h3>
+            <h3 class="pt-3">Our Products</h3>
 
-            <router-link to="/admin/category/add">
-                <button class="btn2 btn-primary btn-lg" style="float:right">Add Category</button>
+            <router-link to="/admin/product/new">
+                <button class="btn2 btn-primary btn-lg" style="float:right">Add Products</button>
             </router-link>
 
         </div>
@@ -16,18 +16,18 @@
 <div class="row"></div>
 </div>
   
-<Catbox/>
+<Prod/>
 
 </template>
 
 <script>
 
 const axios = require("axios");
-import Catbox from "../../components/Categorybox.vue"
+import Prod from "../../components/AdminProducts--.vue"
 
 export default {
 components:{
-    Catbox
+    Prod
 },
 
 data() {
