@@ -1,7 +1,7 @@
 <template>
   
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form @submit.prevent="signup">
 		<h2>Create Free Account</h2>
 		<p class="hint-text">It's FREE and takes a minute.</p>
         <div class="form-group">
@@ -16,9 +16,6 @@
 		<div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password" required="required">
         </div>        
-        <div class="form-group">
-			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
 		<div class="form-group">
             <button type="submit" class="btn3 btn-success btn-lg btn-block">Register Now</button>
         </div>
@@ -31,6 +28,36 @@
 
 <script>
 export default {
+data() {
+	return {
+		name: "",
+		email: "",
+		password: "",
+		contact: ""
+	}
+},
+methods: {
+	signup() {
+		fetch("https://final-project-o.herokuapp.com/users", {
+			method: "POST",
+			body: JSON.stringify({
+				name: this.name,
+				email: this.email,
+				contact: this.contact,
+				password: this.password,
+			}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8",
+			},
+		})
+		.then((response) => response.json())
+		.then((json) => console.log(json));
+		this.msg = `${ this.name } Registered Successfuly`;
+		// alert("Logging in..");
+		this.$router.push({ name: "Products"});
+	},
+},
+
 
 }
 </script>

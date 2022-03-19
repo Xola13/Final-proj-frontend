@@ -3,16 +3,17 @@
 
 <div class="container">
 	<section id="content">
-		<form action="">
+		<form @submit.prevent="login">
 			<h1>Login Form</h1>
 			<div>
-				<input type="text" placeholder="Username" required="" id="username" />
+				<input type="text" placeholder="email" required="true" id="email" />
 			</div>
 			<div>
-				<input type="password" placeholder="Password" required="" id="password" />
+				<input type="password" placeholder="Password" required="true" id="password" />
 			</div>
 			<div>
-				<input type="submit" value="Log in" />
+				
+				<button type="submit">LOG IN</button>
 				<router-link to="/signup">Register</router-link>
 			</div>
 		</form>
@@ -25,6 +26,42 @@
 <script>
 export default {
 
+  data() {
+	  return{
+		  name: "",
+		  email: "",
+		  password: "",
+		  msg: "",
+		   isLoggedIn: false
+	  };
+  },
+
+
+
+methods: {	
+login() {
+	fetch("https://final-project-o.herokuapp.com/users", {
+		method: "PATCH",
+		body: JSON.stringify({
+			email: this.email,
+			password: this.password,
+		}),
+		headers: {
+			"Content-type": "application/json; charset=UTF-8",
+		},
+	})
+	.then((response) => response.json())
+	.then((json) => {
+		localStorage.setItem("jwt", json.jwt);
+		console.log(json.jwt)
+		alert("Logging in..");
+		this.$router.push({ name: "Products"});
+	})
+	.catch((err) => {
+		alert(err);
+	});
+},
+},
 }
 </script>
 

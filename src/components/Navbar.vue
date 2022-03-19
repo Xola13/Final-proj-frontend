@@ -18,17 +18,17 @@
 
       <ul class="navbar__links">
         <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/about">Connections</router-link>
+        <li><router-link to="#">Connections</router-link>
           <ul class="navbar__sublinks">
             <li><router-link to="/admin">Admin</router-link></li>
-            <li><router-link to="/">dribbble</router-link></li>
+            <li><router-link to="/products">Products</router-link></li>
             <li><router-link to="/">behance</router-link></li>
             <li><router-link to="/">codepen</router-link></li>
             <li><router-link to="/">vimeo</router-link></li>
           </ul>
         </li>
-        <li><router-link to="/products">Products</router-link></li>
-         <li><router-link to="/profile"><i class="fa fa-user"></i>Profile</router-link>
+        <li><router-link to="/cart">Cart</router-link></li>
+         <li><router-link to="#"><i class="fa fa-user"></i>Profile</router-link>
           <ul class="navbar__sublinks">
             <li><router-link to="/login">Log in</router-link></li>
             <!-- <li><router-link to="/signup">Sign up</router-link></li> -->
@@ -48,6 +48,18 @@
 </template>
 
 <script>
+
+export default {
+
+methods: {
+	logout() {
+        localStorage.removeItem('jwt')
+        this.$router.push({
+          name: 'Login'
+        })
+	}
+}
+}
 
 </script>
 
@@ -296,7 +308,7 @@
 	 .navbar__sublinks li:first-child {
 		 margin-top: 0;
 	}
-}
+ }
 
  
 
