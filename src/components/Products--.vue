@@ -1,28 +1,56 @@
 <template>
   
-  <div class="wrap">
+  <div class="wrap" v-if="products">
+    <div v-for="(product, index) of products" :key="index.id">
     <div class="card">
       <div class="card__inner">
-        <div class="card___imagen"><img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MRJ82?wid=572&hei=572&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1570059328172" alt="" width="250"></div>
+        <div class="card___imagen"><img :src='product.img' alt="" width="250"></div>
         <div class="card__info">
-          <p>Audifonos Beats Pro 🎧</p>
-          <h2>Color: Gris</h2>
-          <p>299$</p>
-          <a href="#" class="button">Add to cart</a>
+          <p>{{ title }}</p>
+          <h2>{{ description }}</h2>
+          <p>{{ price }}</p>
+          <button><router-link to="/modal" data-bs-toggle="modal">View</router-link></button>
         </div>
       </div>
     </div>
   </div>
+  </div>
+ <Modal />
+  
 
 </template>
 
 <script>
+import Modal from "../components/Modal--.vue"
+
+export default {
+  data() {
+    return {
+      products:[],
+    components: { Modal },  
+    };
+  },
+
+ 
+
+  methods: {
+    
+  },
+ mounted() {
+   fetch("https://final-project-o.herokuapp.com/products/")
+   .then(res => res.json())
+   .then(data => {
+     this.products = data;
+   })
+ }
+};
+
 
 </script>
 
 <style scoped>
 
-.wrap {
+ .wrap {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -102,7 +130,7 @@
     border-radius: 15px;
     font-weight: bold;
     margin-bottom: 1em;
-}
+} 
 
 
 </style>
