@@ -1,48 +1,59 @@
 <template>
    
-   <div class="container">
-       <div class="row">
-           <div class="col-12" text-center>
-               <h3 class="pt-3">
-                   Shopping Cart
-               </h3>
-           </div>
-       </div>
-
-
-     <div class="product-card">
-    <div class="image-card">
-      <img src='https://picsum.photos/300/300/' alt='product-image'/>
-    </div>
-    <div class="product-content">
-      
-      <header class="product-title">Lorem ipsum</header>
-      <div class="product-rating">
-        <div class='star'></div>
-        <div class='star'></div>
-        <div class='star'></div>
-        <div class='star'></div>
+ <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3 class="pt-3">
+          Shopping cart
+        </h3>
       </div>
-      <section class='product-info'>
-        <span class='desc'>Lorem ipsum deluxe type with so and so </span> 
-        <a href="#" onclick='return handleModify()'>Toggle price list</a>
-      </section>
-      <section class='product-info'>
-        <span class='desc'> 2 Lorem / 3 ipsum </span> 
-        <section class='product-price-details'>
-          <div>dener </div>
-          <span class='price'>$1200</span>
-          <span>de ranp</span>
-      </section>
-      </section>
-      <div class='seperator'></div>
-      
+    </div>
+
+    <!-- loop over the cart items and display -->
+
+    <div v-for="cartItem in cartItems" :key="cartItem.id" class="row mt-2 pt-3">
+      <div class="col-2"></div>
+      <div class="col-md-3">
+        <img
+          :src="cartItem.product.imageURL"
+          alt=""
+          class="w-100 card-image-top embed-responsive embed-responsive-16by9"
+          style="object-fit: cover"
+        />
+      </div>
+
+      <!-- display product name, quantity -->
+      <div class="col-md-5 px-3">
+        <div class="card-block px-3">
+          <h6 class="card-title">
+            {{ cartItem.product.name }}
+          </h6>
+
+          <p class="mb-0 font-weight-bold" id="item-price">
+            $ {{ cartItem.product.price }} per unit
+          </p>
+          <p class="mb-0">Quantity:{{ cartItem.quantity }}</p>
+        </div>
+        <p class="mb-0">
+          Total:
+          <span class="font-weight-bold">
+            $ {{ cartItem.product.price * cartItem.quantity }}
+          </span>
+        </p>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-12"><hr /></div>
+    </div>
+
+    <!-- display the price -->
+    <div class="total-cost pt-2 text-right">
+      <h5>Total : ${{ totalCost }}</h5>
     </div>
   </div>
 
    
 
-   </div>
+   
 
 
 </template>
@@ -51,234 +62,56 @@
 
 
 export default {
+data() {
+  return {
+    cartItems: [],
+    token: null,
+    totalCost: 0,
+  };
+},
 
-}
+mounted() {
+  if(localStorage.getItem("jwt")) {
+    fetch("https://final-project-o.herokuapp.com/products", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    })
+    .then((response) => response.json())
+    .then((json) => {
+      this.products = json;
+      this.products.forEach(async (product) => {
+        await fetch (
+          "https://final-project-o.herokuapp.com/users" + userId,
+          {
+            method: "GET",
+            headers: {
+              "content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+            },
+          }
+        )
+        .then((response) => response.json())
+        .then((json) => {
+          userId_name = json.name
+        });
+      });
+    })
+    .catch((err) => {
+      alert("User not logged in");
+    });
+  } else {
+    alert("User not logged in");
+    this.$router.push({ name: "Login" });
+  }
+},
+};
 </script>
 
 <style scoped>
 
-:root {
-  font-size: 12px;
-  --image-width: 200px;
-  --image-height: 200px;
-  --product-card-height: 250px;
-}
 
-.body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  box-sizing: border-box;
-} 
-
-.product-card {
-  border-radius: .9rem;
-  width: 40vw;
-  height:var(--product-card-height);
-  box-shadow: 0 0 8px -2px rgba(0, 0, 0, 0.5);
-  display: flex;
-}
-
- .product-card:hover {
-    box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.5); 
-  }
-
-.image-card {
-  border-radius: .9rem;
-  width: var(--image-width);
-  height: var(--image-height);
-  box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.5);
-  transform: scale(1, 1) translate(calc(var(--image-width)/-4), calc((var(--product-card-height) - var(--image-height)) / 2)) scale(1, 1);
-  background-color: white;
-  overflow: hidden;
-  transition: transform .2s ease-in-out;
-}
-
-.image-card img:hover {
-  transform: scale(1.1);
- transition: transform 5s ease-in-out;
-}
-
-.product-content{
-  padding: 1.5rem 0;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: center;
-}
-
-.product-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.product-info {
-  font-size: 1.3rem;
-  color: gray;
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.product-info > :nth-child(2) {
-  width: 30%;
-}
-
-.product-info > :nth-child(1) {
-  width: 70%;
-}
-
-.product-price-details {
-  font-size: 1.5rem;
-  color: black;
-  padding-top: 5px;
-}
-
-
-.price {
-  font-size: 1.5rem;
-}
-.desc {
-  flex-grow: 2;
-}
-
-.star {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  border: 1px solid rgba(250, 200, 100, 1);
-  background: linear-gradient(to right, rgba(250, 200, 100, 1) 100%, yellow);
--webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-
-@media screen and (max-width: 426px)  {
-  .product-card {
-    width: 100%;
-    flex-direction: column;
-    min-height: 400px;
-    margin: calc((100% - var(--image-height))/2) 0;
-  }
-  .product-content {
-    align-content: center;
-    justify-content: space-between;
-    padding: 5px 15px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .product-info > :nth-child(2){
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .body {
-    flex-direction: column;
-  }
-  .product-card > * {
-    transform: translate(0,  calc(var(--image-height)/-4))
-  }
-  .image-card {
-    transform: translate(calc(100% - 20px - var(--image-width)/2),  calc(var(--image-height)/-4))
-  }
-}
-
-@media screen and (max-width: 376px) {
-  .image-card {
-    transform:translate(0, 0);
-    width: 100%;
-    box-shadow: none;
-    height: 35%;
-    border-radius: 0;
-  }
-  
-  .product-card > * {
-        transform:translate(0, 0);
-  }
-}
-
-.popup-wrapper {
-  display: block;
-  position: fixed;
-  box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.5);
-  background: white;
-  z-index: 9999;
-  padding: 10px;
-  border-radius: 12px;
-}
-
-@keyframes slide-down {
-  0% { max-height: 0px;}
-  100% { max-height:400px ; }
-}
-.popup {
-  animation: slide-down 1.32s ease;
-  overflow: hidden;
-}
-
-.popup > ul {
-  list-style: none;
-  padding: 0 10px;
-  max-width: 400px;
-  max-height: 200px;
-  min-height: 200px;
-  overflow: scroll;
-}
-.popup>header {
-  width: 100%;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.popup > ul > li {
-  padding: 5px 0;
-  display: flex;
-  min-width: 200px;
-  justify-content: space-between;
-  align-items:center;
-  text-transform: capitalize;
-} 
-
-.popup > ul > li button {
-  border-style: none;
-  padding: 10px;
-}
-
-.popup-wrapper::before {
-  display: block;
-  content: ' ';
-  width: 20px;
-  height: 20px;
-  box-shadow: 5px 0px 5px -5px rgba(0, 0, 0, .9);
-  background: white;
-  position: absolute;
-  right: -10px;
-  top: 15px;
-  z-index: 99999;
-  transform: rotate(45deg);
-}
-
-@media screen and (min-width: 426px) and (max-width: 1024px) {
-  .body {
-    flex-direction: column;
-  }
-  .product-info > :nth-child(2){
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-self: baseline;
-    
-  }
-  .product-card {
-    width: 90% !important;
-    margin:10px calc(var(--image-width)/4);
-    box-sizing: border-box;
-  }
-}
 
 </style>

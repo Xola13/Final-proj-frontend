@@ -1,7 +1,7 @@
 <template>
   
 <div class="home">
- 
+<button class="btn"><router-link to="/products">Shop</router-link></button>
 
 </div>
 
@@ -16,11 +16,20 @@ export default {
 <style>
  
  .home{
-    background-image:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/clock.gif");
+    background-image: url("../assets/rolex.jpg");
+    background-size: cover;
     height: 100vh;
     background-size: cover;
-    overflow: hidden;
-    overflow-y: hidden;
+    
 } 
+.btn{
+  justify-items: center;
+  position: fixed;
+  float: bottom;
+  top: 40%;
+  color: rgb(213, 214, 214);
+  background-color: rgb(241, 240, 231);
+}
+
 
 </style>

@@ -6,28 +6,27 @@
       <div class="card__inner">
         <div class="card___imagen"><img :src='product.img' alt="" width="250"></div>
         <div class="card__info">
-          <p>{{ title }}</p>
+          <p>{{ product.title }}</p>
           <h2>{{ description }}</h2>
-          <p>{{ price }}</p>
-          <button><router-link to="/modal" data-bs-toggle="modal">View</router-link></button>
+          <p>{{ product.price }}</p>
+          <button>Add Cart</button>
+         
         </div>
       </div>
     </div>
   </div>
   </div>
- <Modal />
-  
 
 </template>
 
 <script>
-import Modal from "../components/Modal--.vue"
+
 
 export default {
   data() {
     return {
       products:[],
-    components: { Modal },  
+     
     };
   },
 
@@ -50,6 +49,16 @@ export default {
 
 <style scoped>
 
+
+
+
+
+
+
+
+
+
+/*  */
  .wrap {
     width: 100%;
     display: flex;

@@ -4,6 +4,7 @@ import Admin from '../views/Admin.vue'
 
 
 
+
 const routes = [
   {
     path: '/',
@@ -41,11 +42,7 @@ const routes = [
     name: 'Cart',
     component: () => import('../views/Cart.vue')
   },
-  {
-    path: '/modal',
-    name: 'Modal',
-    component: () => import('../components/Modal--.vue')
-  },
+ 
 
      // Admin homepage
 

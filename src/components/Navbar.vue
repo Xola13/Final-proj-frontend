@@ -27,7 +27,9 @@
             <li><router-link to="/">vimeo</router-link></li>
           </ul>
         </li>
-        <li><router-link to="/cart">Cart</router-link></li>
+        <li><router-link :to="{ name: 'Cart'}">
+			<i class="fa fa-shopping-cart" style="font-size:20px"></i>
+			</router-link></li>
          <li><router-link to="#"><i class="fa fa-user"></i>Profile</router-link>
           <ul class="navbar__sublinks">
             <li><router-link to="/login">Log in</router-link></li>

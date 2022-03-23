@@ -55,7 +55,7 @@ login() {
 		localStorage.setItem("jwt", json.jwt);
 		console.log(json.jwt)
 		alert("Logging in..");
-		this.$router.push({ name: "Products"});
+		this.$router.push({ name: "Cart"});
 	})
 	.catch((err) => {
 		alert(err);
