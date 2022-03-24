@@ -52,8 +52,9 @@ login() {
 	})
 	.then((response) => response.json())
 	.then((json) => {
-		localStorage.setItem("jwt", json.jwt);
-		console.log(json.jwt)
+		localStorage.setItem("jwt", json.access_token);
+		console.log(json);
+		console.log(json.access_token)
 		alert("Logging in..");
 		this.$router.push({ name: "Cart"});
 	})

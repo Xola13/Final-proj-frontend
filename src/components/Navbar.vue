@@ -22,7 +22,7 @@
           <ul class="navbar__sublinks">
             <li><router-link to="/admin">Admin</router-link></li>
             <li><router-link to="/products">Products</router-link></li>
-            <li><router-link to="/">behance</router-link></li>
+            <li><router-link to="/contact">Contact</router-link></li>
             <li><router-link to="/">codepen</router-link></li>
             <li><router-link to="/">vimeo</router-link></li>
           </ul>
@@ -34,7 +34,7 @@
           <ul class="navbar__sublinks">
             <li><router-link to="/login">Log in</router-link></li>
             <!-- <li><router-link to="/signup">Sign up</router-link></li> -->
-            <li><router-link to="/">Log out</router-link></li>
+            <li v-if="this.loggedin == true"><div @click="logout">Log out</div></li>
           </ul>
         </li>
         
@@ -55,13 +55,40 @@ export default {
 
 methods: {
 	logout() {
-        localStorage.removeItem('jwt')
-        this.$router.push({
-          name: 'Login'
-        })
-	}
+        if (!localStorage.getItem("jwt")) {
+			alert("No user to logout!")
+			return this.$router.push({ name: "Home"});
+		}
+        else{
+			localStorage.clear();
+			this.loggedin = false
+			alert("user logged out");
+			this.$router.push({ name: "Home" });
+		}
+	},
+},
+  mounted() {
+    if(localStorage.getItem("jwt")){
+      fetch("https://final-project-o.herokuapp.com/users/:id/", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        this.loggedin = true;
+        this.isadmin = json.isadmin
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    }
+  },
+
 }
-}
+
 
 </script>
 
@@ -228,6 +255,7 @@ methods: {
 	 left: 0;
 	 margin: 0;
 	 padding: 0;
+	 z-index: 222;
 	 background-color: #3f3f4d;
 	 box-shadow: 3px 5px rgba(0, 0, 0, 0.2);
 }

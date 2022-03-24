@@ -3,8 +3,8 @@
 <div class="wrapper">
     <div class="left">
         <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="100">
-        <h4>Alex William</h4>
-         <p>UI Developer</p>
+        <h4> {{ users.name }}</h4>
+         
     </div>
     <div class="right">
         <div class="info">
@@ -12,40 +12,147 @@
             <div class="info_data">
                  <div class="data">
                     <h4>Email</h4>
-                    <p>alex@gmail.com</p>
+                    <p>{{ users.email }}</p>
                  </div>
                  <div class="data">
                    <h4>Phone</h4>
-                    <p>0001-213-998761</p>
+                    <p>{{ users.contact }}</p>
               </div>
             </div>
         </div>
       
-      <div class="projects">
-            <h3>Projects</h3>
-            <div class="projects_data">
-                 <div class="data">
-                    <h4>Recent</h4>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                 </div>
-                 <div class="data">
-                   <h4>Most Viewed</h4>
-                    <p>dolor sit amet.</p>
-              </div>
+      <div class="mt-5 text-center">
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#editUser"
+                class="btn btn-primary profilebtn"
+                type="button"
+              >
+                Edit
+              </button>
             </div>
+           <div class="mt-5 text-center">
+              <button
+                class="btn btn-danger profile-button"
+                type="button"
+                @click="deleteUser"
+              >
+                Delete user
+              </button>
+            </div>
+
+         </div>
         </div>
-      
+
+
+       <!-- Modal -->
+    <div
+      class="modal fade"
+      id="editUser"
+      tabindex="-1"
+      aria-labelledby="editUserLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <profiledit />
+
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+    <!-- Modal -->
+        
+ 
 
 </template>
 
+
 <script>
+import profiledit from "../views/profiledit.vue";
+
 export default {
-name: 'Secure',
+components: {
+  profiledit
+},
+
 data() {
-    return{};
-}
+    return{
+      users: null,
+      email: null,
+    };
+},
+
+  methods: {
+    async deleteUser() {
+      if (confirm("Are you sure you to delete your user?")) {
+        if (!localStorage.getItem("jwt")) {
+          alert("User not logged in");
+          return this.$router.push({ name: "Home" });
+        }
+
+        try {
+          fetch("https://final-project-o.herokuapp.com/contact/DeleteUser", {
+            method: "POST",
+            body: JSON.stringify({
+              email: this.email,
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              this.loading = false;
+              fetch("https://final-project-o.herokuapp.com/users", {
+                method: "DELETE",
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                },
+              })
+                .then((response) => response.json())
+                .then((json) => {
+                  alert("DELETED USER");
+                  localStorage.clear();
+                  return this.$router.push({ name: "Home" });
+                })
+                .catch((err) => {
+                  alert(err);
+                });
+            });
+        } catch (error) {
+          alert(err);
+          this.loading = false;
+        }
+      }
+    },
+  },
+  mounted() {
+    if (!localStorage.getItem("jwt")) {
+      return this.$router.push({ name: "Home" });
+    }
+    fetch("https://final-project-o.herokuapp.com/users/:id/", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        this.users = json;
+        this.email = json.email;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  },
+
+
+
 }
 </script>
 

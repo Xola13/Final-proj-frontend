@@ -1,7 +1,7 @@
 <template>
   
 <div class="home">
-<button class="btn"><router-link to="/products">Shop</router-link></button>
+<button><router-link to="/products">Shop</router-link></button>
 
 </div>
 

@@ -15,7 +15,7 @@
       <div class="col-2"></div>
       <div class="col-md-3">
         <img
-          :src="cartItem.product.imageURL"
+          :src="product.img"
           alt=""
           class="w-100 card-image-top embed-responsive embed-responsive-16by9"
           style="object-fit: cover"
@@ -26,18 +26,18 @@
       <div class="col-md-5 px-3">
         <div class="card-block px-3">
           <h6 class="card-title">
-            {{ cartItem.product.name }}
+            {{ products.title }}
           </h6>
 
           <p class="mb-0 font-weight-bold" id="item-price">
-            $ {{ cartItem.product.price }} per unit
+            $ {{ products.price }} per unit
           </p>
-          <p class="mb-0">Quantity:{{ cartItem.quantity }}</p>
+          <p class="mb-0">Quantity:{{ product.quantity }}</p>
         </div>
         <p class="mb-0">
           Total:
           <span class="font-weight-bold">
-            $ {{ cartItem.product.price * cartItem.quantity }}
+            $ {{ products.price * products.quantity }}
           </span>
         </p>
       </div>
@@ -47,11 +47,11 @@
 
     <!-- display the price -->
     <div class="total-cost pt-2 text-right">
-      <h5>Total : ${{ totalCost }}</h5>
+      <h5>Total : R{{ products.price }}</h5>
     </div>
   </div>
 
-   
+   <button @click="deleteItem(carts._id)">Remove</button>
 
    
 
@@ -64,50 +64,57 @@
 export default {
 data() {
   return {
-    cartItems: [],
-    token: null,
-    totalCost: 0,
+    cart: null,
   };
 },
 
+methods: {
+checkout(){
+},
+deleteItem() {
+  fetch("https://final-project-o.herokuapp.com/users/:id/cart", {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  })
+  .then((res) => res.json())
+  .then((json) => {
+    location.reload();
+  })
+  .catch((err) => {
+    alert(err);
+  });
+},
+
+
+},
+
+
 mounted() {
-  if(localStorage.getItem("jwt")) {
-    fetch("https://final-project-o.herokuapp.com/products", {
+  if(!localStorage.getItem("jwt")) {
+    alert("Please log in First");
+    return this.$router.push({ name: "Products" });
+  }
+  else{
+    fetch("https://final-project-o.herokuapp.com/cart/", {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     })
-    .then((response) => response.json())
+    .then((res) => res.json())
     .then((json) => {
-      this.products = json;
-      this.products.forEach(async (product) => {
-        await fetch (
-          "https://final-project-o.herokuapp.com/users" + userId,
-          {
-            method: "GET",
-            headers: {
-              "content-type": "application/json; charset=UTF-8",
-              Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-            },
-          }
-        )
-        .then((response) => response.json())
-        .then((json) => {
-          userId_name = json.name
-        });
-      });
+      this.cart = json;
     })
     .catch((err) => {
-      alert("User not logged in");
-    });
-  } else {
-    alert("User not logged in");
-    this.$router.push({ name: "Login" });
+      alert(err);
+    })
   }
-},
-};
+}
+}
 </script>
 
 <style scoped>

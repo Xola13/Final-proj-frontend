@@ -4,12 +4,14 @@
     <div v-for="(product, index) of products" :key="index.id">
     <div class="card">
       <div class="card__inner">
-        <div class="card___imagen"><img :src='product.img' alt="" width="250"></div>
+        <div class="card___imagen"><img :src='product.img' alt="" width="295" height="254"></div>
         <div class="card__info">
           <p>{{ product.title }}</p>
           <h2>{{ description }}</h2>
           <p>{{ product.price }}</p>
-          <button>Add Cart</button>
+          <button
+          type="button"
+          @click="addToCart(products._id)">Add Cart</button>
          
         </div>
       </div>
@@ -34,6 +36,8 @@ export default {
 
   methods: {
     
+
+
   },
  mounted() {
    fetch("https://final-project-o.herokuapp.com/products/")
