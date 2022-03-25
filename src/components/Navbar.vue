@@ -23,18 +23,24 @@
             <li><router-link to="/admin">Admin</router-link></li>
             <li><router-link to="/products">Products</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
-            <li><router-link to="/">codepen</router-link></li>
-            <li><router-link to="/">vimeo</router-link></li>
+            
           </ul>
         </li>
         <li><router-link :to="{ name: 'Cart'}">
 			<i class="fa fa-shopping-cart" style="font-size:20px"></i>
 			</router-link></li>
-         <li><router-link to="#"><i class="fa fa-user"></i>Profile</router-link>
+         <li><router-link :to="{ name: 'Profile' }"><i class="fa fa-user"></i>Profile</router-link>
           <ul class="navbar__sublinks">
-            <li><router-link to="/login">Log in</router-link></li>
             <!-- <li><router-link to="/signup">Sign up</router-link></li> -->
-            <li v-if="this.loggedin == true"><div @click="logout">Log out</div></li>
+			<div v-if="this.loggedin !== true">
+				            <li><router-link to="/login">Log in</router-link></li>
+
+			</div>
+			<div v-else> 
+							 <li> <button @click="logout">Log out</button></li>
+
+             </div>
+            
           </ul>
         </li>
         
@@ -67,25 +73,25 @@ methods: {
 		}
 	},
 },
-  mounted() {
-    if(localStorage.getItem("jwt")){
-      fetch("https://final-project-o.herokuapp.com/users/:id/", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        this.loggedin = true;
-        this.isadmin = json.isadmin
-      })
-      .catch((err) => {
-        alert(err);
-      });
-    }
-  },
+//   mounted() {
+//     if(localStorage.getItem("jwt")){
+//       fetch("https://final-project-o.herokuapp.com/users/:id", {
+//       method: "GET",
+//       headers: {
+//         "Content-type": "application/json; charset=UTF-8",
+//         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+//       },
+//     })
+//       .then((response) => response.json())
+//       .then((json) => {
+//         this.loggedin = true;
+//         this.isadmin = json.isadmin
+//       })
+//       .catch((err) => {
+//         alert(err);
+//       });
+//     }
+//   },
 
 }
 

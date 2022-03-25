@@ -1,5 +1,6 @@
 <template>
   
+  
   <div class="wrap" v-if="products">
     <div v-for="(product, index) of products" :key="index.id">
     <div class="card">
@@ -18,6 +19,7 @@
     </div>
   </div>
   </div>
+  
 
 </template>
 
@@ -27,25 +29,93 @@
 export default {
   data() {
     return {
-      products:[],
+      products: "",
+      search: "",
      
+     selected: "",
     };
   },
 
  
 
   methods: {
-    
+    addToCart() {
+      if(!localStorage.getItem("jwt")) {
+        alert("Log in first");
+        return this.$router.push({ name: "Products"});
+      } else {
+        let cart = 1;
+        fetch(`https://final-project-o.herokuapp.com/users/cart/`, {
+          method: "POST",
+          body: JSON.stringify({
+            userId: "",
+            products: "",
+            
+          }),
+          headers: {
+            "Content-type": "application/json; charset-UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        })
+        .then((res) => res.json())
+        .then((json) => {
+          alert("Added to Cart");
+        })
+        .catch((err) => {
+          alert(err);
+        });
+      }
+    },
 
 
   },
  mounted() {
-   fetch("https://final-project-o.herokuapp.com/products/")
-   .then(res => res.json())
-   .then(data => {
-     this.products = data;
+   fetch("https://final-project-o.herokuapp.com/products/", {
+     method: "GET",
+     headers: {
+       "Content-type": "application/json; charset=UTF-8",
+     },
    })
- }
+   .then((res) => res.json())
+   .then((json) => {
+     this.products = json;
+   })
+   
+   .catch((err) => {
+     alert(err);
+     console.log(err);
+   });
+ },
+
+computed: {
+  filterProducts: function() {
+    let filtered = this.product
+    if(this.selected == '') {
+      filtered = filtered.filter((product) => {
+        return product.category.match(this.selected);
+
+      });
+      if(this.search){
+        filtered = filtered.filter((product) => {
+          return product.title.match(this.search)
+        })
+      }
+      return filtered
+    }
+    if (this.selected){
+      filtered = filtered.filter((product) => {
+        return product.title.match(this.search)
+      });
+      if(this.search){
+        filtered = filtered.filter((product) => {
+          return product.title.match(this.search)
+        })
+      }
+      return filtered
+    }
+  },
+},
+
 };
 
 
@@ -67,6 +137,8 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
 }
 
 .card {

@@ -37,7 +37,7 @@
         <p class="mb-0">
           Total:
           <span class="font-weight-bold">
-            $ {{ products.price * products.quantity }}
+            R {{ products.price * products.quantity }}
           </span>
         </p>
       </div>
@@ -45,16 +45,21 @@
       <div class="col-12"><hr /></div>
     </div>
 
+
+  <button @click="deleteItem(carts._id)">Remove</button>
+
+
     <!-- display the price -->
     <div class="total-cost pt-2 text-right">
-      <h5>Total : R{{ products.price }}</h5>
+      <h5>Total : R{{ total }}</h5>
+      <div v-if="total > 0">
+        <button @click="checkout" class="btn btn-secondary">
+          Checkout
+        </button>
     </div>
   </div>
-
-   <button @click="deleteItem(carts._id)">Remove</button>
-
-   
-
+</div>
+ 
 
 </template>
 
@@ -65,13 +70,47 @@ export default {
 data() {
   return {
     cart: null,
+    email: null,
   };
 },
 
 methods: {
 checkout(){
+  fetch("https://final-project-o.herokuapp.com", {
+    method: "POST",
+    body: JSON.stringify({
+     cart: this.cart,
+     email: this.email,
+     price: this.price,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+  .then((res) => {
+    console.log(res);
+    return res.json();
+  })
+  .then((json) => {
+    console.log(json.msg);
+    fetch("https://final-project-o.herokuapp.com/cart/", {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    })
+    .then((res) => res.json())
+    .then((json) => {
+      alert("Items bought, Check email to confirm");
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  })
+  .catch((err) => console.log(err));
 },
-deleteItem() {
+deleteItem(id) {
   fetch("https://final-project-o.herokuapp.com/users/:id/cart", {
     method: "DELETE",
     headers: {
@@ -108,13 +147,40 @@ mounted() {
     .then((res) => res.json())
     .then((json) => {
       this.cart = json;
+      console.log(this.cart);
     })
     .catch((err) => {
       alert(err);
+    });
+    fetch("https://final-project-o.herokuapp.com/users/:id", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     })
+    .then((res) => res.json())
+    .then((json) => {
+      email = this.email;
+    })
+    .catch((err) => {
+      alert(err);
+    });
   }
-}
-}
+},
+computed: {
+ total: function() {
+   var list = this.cart;
+   var sum = 0;
+   for (var listProps in list) {
+     list[listProps].cart.forEach(function (cart){
+       sum += cart.quantity.quantity * cart.price;
+     });
+   }
+   return sum;
+  },
+ },
+};
 </script>
 
 <style scoped>

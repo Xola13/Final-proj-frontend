@@ -21,7 +21,7 @@
             </div>
         </div>
       
-      <div class="mt-5 text-center">
+      <div class="mt-2 text-center">
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#editUser"
@@ -80,8 +80,8 @@ components: {
 
 data() {
     return{
-      users: null,
-      email: null,
+      users: "",
+      email: "",
     };
 },
 
@@ -156,7 +156,7 @@ data() {
 }
 </script>
 
-<style>
+<style scoped>
 
 /* @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap'); */
 

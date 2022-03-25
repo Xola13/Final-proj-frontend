@@ -1,5 +1,7 @@
 <template>
-  
+  <div class="contact">
+
+
 <div id="container">
   <h1>&bull; Keep in Touch &bull;</h1>
   <div class="underline">
@@ -41,7 +43,7 @@
     </div>
   </form>
 </div>
-
+  </div>
 </template>
 
 <script>

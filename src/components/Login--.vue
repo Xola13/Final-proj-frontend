@@ -1,15 +1,15 @@
 <template>
-
+<div id="lol">
 
 <div class="container">
 	<section id="content">
 		<form @submit.prevent="login">
 			<h1>Login Form</h1>
 			<div>
-				<input type="text" placeholder="email" required="true" id="email" />
+				<input type="text" placeholder="email" v-model="email" required="true" id="email" />
 			</div>
 			<div>
-				<input type="password" placeholder="Password" required="true" id="password" />
+				<input type="password" placeholder="Password" v-model="password" required="true" id="password" />
 			</div>
 			<div>
 				
@@ -21,6 +21,8 @@
 	</section>
 </div>
 
+</div>
+
 </template>
 
 <script>
@@ -28,11 +30,10 @@ export default {
 
   data() {
 	  return{
-		  name: "",
+		 
 		  email: "",
 		  password: "",
-		  msg: "",
-		   isLoggedIn: false
+		  
 	  };
   },
 
@@ -68,6 +69,10 @@ login() {
 
 <style scoped>
 
+.container{
+	top: 200px;
+}
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -87,7 +92,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 }
 body {
-	background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
+	background-image: url("../assets/clockk.jpg") !important;
 	color: #000;
 	font: 14px Arial;
 	margin: 0 auto;
