@@ -125,6 +125,7 @@ methods: {
    margin-right: 0px !important;
    padding-right: 0px !important;
    max-width: 100% !important;
+   position: absolute;
    
 }
  .navbar__flex {

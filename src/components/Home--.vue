@@ -1,7 +1,7 @@
 <template>
   
 <div class="home">
-<button><router-link to="/products">Shop</router-link></button>
+<button class="btn btn-secondary"><router-link to="/products">Shop</router-link></button>
 
 </div>
 
@@ -20,6 +20,7 @@ export default {
     background-size: cover;
     height: 100vh;
     background-size: cover;
+    background-attachment: fixed;
     
 } 
 .btn{

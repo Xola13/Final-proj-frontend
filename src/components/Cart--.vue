@@ -65,12 +65,16 @@
 
 <script>
 
+import Products from '../views/Products.vue'
 
 export default {
 data() {
   return {
-    cart: null,
-    email: null,
+    cart: JSON.parse(localStorage.getItem('cart')),
+    products: [],
+    email: '',
+    page: 'cart',
+    
   };
 },
 
@@ -137,35 +141,13 @@ mounted() {
     return this.$router.push({ name: "Products" });
   }
   else{
-    fetch("https://final-project-o.herokuapp.com/cart/", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    })
-    .then((res) => res.json())
-    .then((json) => {
-      this.cart = json;
-      console.log(this.cart);
-    })
-    .catch((err) => {
-      alert(err);
-    });
-    fetch("https://final-project-o.herokuapp.com/users/:id", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    })
-    .then((res) => res.json())
-    .then((json) => {
-      email = this.email;
-    })
-    .catch((err) => {
-      alert(err);
-    });
+      fetch("https://final-project-o.herokuapp.com/products")
+      .then((res) => res.json())
+      .then((data) => {
+        this.products = data;
+        console.log(data, this.products);
+      })
+  
   }
 },
 computed: {
@@ -180,11 +162,15 @@ computed: {
    return sum;
   },
  },
+
+ components: {Products}
 };
 </script>
 
 <style scoped>
 
-
+.container{
+  padding-top: 100px;
+}
 
 </style>
