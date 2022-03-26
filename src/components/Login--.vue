@@ -52,12 +52,23 @@ login() {
 		},
 	})
 	.then((response) => response.json())
-	.then((json) => {
+	.then(async (json) => {
+		// if(json.access_token){
+		// 	console.log(json.access_token)
+		// 	alert("Logging in");
+		// 	this.$router.push({ name: "Products" });
+		// 	return await localStorage.setItem("jwt", json.access_token);
+		// }
+		// consoole.log(json);
+		// alert("Wrong details")
+		// this.$router.push({ name: "Home" })
+		// if(json.access_token){
 		localStorage.setItem("jwt", json.access_token);
 		console.log(json);
 		console.log(json.access_token)
 		alert("Logging in..");
 		this.$router.push({ name: "Cart"});
+		// }
 	})
 	.catch((err) => {
 		alert(err);

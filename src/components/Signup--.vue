@@ -65,8 +65,8 @@ methods: {
 <style>
 
 	body{
-		color: rgb(83, 77, 77);
-		background: #63738a;
+		color: rgb(104, 31, 31);
+		background: #6fa2e9;
 		font-family: 'Roboto', sans-serif;
 	}
     .form-control{
@@ -84,6 +84,7 @@ methods: {
 		width: 400px;
 		margin: 0 auto;
 		padding: 30px 0;
+		
 	}
 	.signup-form h2{
 		color: #636363;
@@ -118,6 +119,7 @@ methods: {
         background: #f2f3f7;
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         padding: 30px;
+		margin-top: 100px;
     }
 	.signup-form .form-group{
 		margin-bottom: 20px;
