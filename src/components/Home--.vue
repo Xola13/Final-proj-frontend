@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
  
  .home{
     background-image: url("../assets/rolex.jpg");
