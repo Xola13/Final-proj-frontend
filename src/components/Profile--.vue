@@ -12,16 +12,16 @@
             <div class="info_data">
                  <div class="data">
                     <h4>Email</h4>
-                    <p>{{ users.email }}</p>
+                    <p>{{ user.email }}</p>
                  </div>
                  <div class="data">
                    <h4>Phone</h4>
-                    <p>{{ users.contact }}</p>
+                    <p>{{ user.contact }}</p>
               </div>
             </div>
         </div>
       
-      <div class="mt-2 text-center">
+       <div class="mt-6 text-center">
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#editUser"
@@ -31,7 +31,7 @@
                 Edit
               </button>
             </div>
-           <div class="mt-5 text-center">
+           <div class="mt-6 text-center">
               <button
                 class="btn btn-danger profile-button"
                 type="button"
@@ -42,6 +42,7 @@
             </div>
 
          </div>
+          
         </div>
 
 
@@ -159,6 +160,10 @@ data() {
 <style scoped>
 
 /* @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap'); */
+
+.btn{
+  float: left;
+}
 
 *{
   margin: 0;

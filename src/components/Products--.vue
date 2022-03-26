@@ -17,7 +17,7 @@
                         
                           <div id="product-price-btn">
                             <input type="number" min="1" value="1" id="addToCart0" style="width:45px" class="qty" >
-                          <button type="button" @click="addToCart(product_id)">AddCart</button>
+                          <button type="submit">AddCart</button>
                         </div>
                       </div>
                     </div>
@@ -42,51 +42,76 @@ export default {
 
   data() {
     return {
-      products: [],
-      id: this.$route.params.id,
-      cart: JSON.parse(localStorage.getItem('cart'))
+      products: null,
+      quantity: 1,
+      user: JSON.parse(localStorage.getItem('user'))
     };
   },
 
 
 
- mounted() {
-   fetch("https://final-project-o.herokuapp.com/products/" + this.id)
-      .then((res) => res.json())
-      .then((data) => {
-        this.product = data;
-        console.log(this.product);
-      });
-},
+//  mounted() {
+//    fetch("https://final-project-o.herokuapp.com/products/" + this.id)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         this.product = data;
+//         console.log(this.product);
+//       });
+// },
 
   methods: {
 
- AddToCart(){
-  this.cart.push(this.product);
-  localStorage.setItem('cart', JSON.stringify(this.cart));
-  localStorage.getItem('cart');
-  console.log(console.log(JSON.parse(localStorage.getItem('cart'))));
+    addToCart(id){
+      if (localStorage.getItem("jwt")) {
+      console.log(this.user)
+      const product = this.products.find(product => product._id === id)
+      fetch(`https://final-project-o.herokuapp.com/cart`, {
+        method: "POST",
+        body: JSON.stringify({
+          userId: this.user._id,
+          products: [
+            {
+              productId: product._id,
+              quantity: this.quantity
+            }
+          ]
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          console.log(user)
+          console.log("He is here")
+        })
+    }
   }
-
-
   },
- mounted() {
-   fetch("https://final-project-o.herokuapp.com/products/", {
-     method: "GET",
-     headers: {
-       "Content-type": "application/json; charset=UTF-8",
-     },
-   })
-   .then((res) => res.json())
-   .then((json) => {
-     this.products = json;
-   })
-   
-   .catch((err) => {
-     alert(err);
-     console.log(err);
-   });
- },
+  mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
 
 computed: {
   filterProducts: function() {

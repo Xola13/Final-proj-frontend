@@ -128,6 +128,7 @@ textarea {
   max-width: 768px;
   top: 150px;
   position: relative;
+  margin-left: 280px;
 }
 
 form {

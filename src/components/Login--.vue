@@ -1,4 +1,4 @@
-<template>
+<template style="background-color:#7E7E7E">
 <div id="lol">
 
 <div class="container">
@@ -80,6 +80,10 @@ login() {
 
 <style scoped>
 
+
+.lol{
+	background-color: #7E7E7E !important;
+}
 .container{
 	top: 200px;
 }
