@@ -1,4 +1,4 @@
-<template style="background-color:#7E7E7E">
+<template>
 <div id="lol">
 
 <div class="container">
@@ -13,7 +13,7 @@
 			</div>
 			<div>
 				
-				<button type="submit">LOG IN</button>
+				<button type="submit" class="butt">LOG IN</button>
 				<router-link to="/signup">Register</router-link>
 			</div>
 		</form>
@@ -52,23 +52,18 @@ login() {
 		},
 	})
 	.then((response) => response.json())
-	.then(async (json) => {
-		// if(json.access_token){
-		// 	console.log(json.access_token)
-		// 	alert("Logging in");
-		// 	this.$router.push({ name: "Products" });
-		// 	return await localStorage.setItem("jwt", json.access_token);
-		// }
-		// consoole.log(json);
-		// alert("Wrong details")
-		// this.$router.push({ name: "Home" })
-		// if(json.access_token){
+	.then((json) => {
+	   if(json.access_token){
 		localStorage.setItem("jwt", json.access_token);
-		console.log(json);
+	   }
 		console.log(json.access_token)
+		if(localStorage.getItem("jwt")) {
 		alert("Logging in..");
 		this.$router.push({ name: "Cart"});
-		// }
+		}
+		else {
+			alert("Wrong Credentials")
+		}
 	})
 	.catch((err) => {
 		alert(err);
@@ -81,15 +76,21 @@ login() {
 <style scoped>
 
 
-.lol{
-	background-color: #7E7E7E !important;
+
+.butt{
+	border-radius: 10%;
+	background-color:rgb(29, 212, 13);
+}
+#lol{
+	background-color: #1b110a !important;
+	height: 100vh;
 }
 .container{
 	top: 200px;
 }
 
 
-html, body, div, span, applet, object, iframe,
+/* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, font, img, ins, kbd, q, s, samp,
@@ -105,7 +106,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	font-size: 100%;
 	vertical-align: baseline;
 	background: transparent;
-}
+} */
 body {
 	background-image: url("../assets/clockk.jpg") !important;
 	color: #000;
@@ -347,6 +348,10 @@ form:after {
 .button a:hover {
 	background-position: 0 -135px;
 	color: #00aeef;
+}
+
+@media screen and (max-width: 575px) {
+	.container { margin: 0px auto; position: relative; width: 0px; }
 }
 
 </style>

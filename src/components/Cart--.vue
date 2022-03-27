@@ -53,7 +53,7 @@ deleteItem(id) {
 
   mounted() {
     if (localStorage.getItem("jwt")) {
-      fetch(`https://final-project-o.herokuapp.com/cart/${this.user._id}`, {
+      fetch("https://final-project-o.herokuapp.com/products", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -64,6 +64,7 @@ deleteItem(id) {
         .then((json) => {
           this.products = json;
           console.log(json)
+          
         }).catch((err) => {
           alert("User not logged in");
         });
@@ -72,6 +73,293 @@ deleteItem(id) {
       this.$router.push({ name: "Home" });
     }
   },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+ mounted() {
+    if (localStorage.getItem("jwt")) {
+      fetch("https://final-project-o.herokuapp.com/products", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json)
+          
+        }).catch((err) => {
+          alert("User not logged in");
+        });
+    } else {
+      alert("User not logged in");
+      this.$router.push({ name: "Home" });
+    }
+  },
+
 computed: {
  total: function() {
    var list = this.cart;

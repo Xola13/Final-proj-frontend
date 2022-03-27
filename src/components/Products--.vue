@@ -90,13 +90,13 @@ export default {
     }
   }
   },
-  mounted() {
-    if (localStorage.getItem("jwt")) {
+ 
+ mounted() {
       fetch("https://final-project-o.herokuapp.com/products", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+   
         },
       })
         .then((response) => response.json())
@@ -104,14 +104,9 @@ export default {
           this.products = json;
           console.log(json)
           
-        }).catch((err) => {
-          alert("User not logged in");
-        });
-    } else {
-      alert("User not logged in");
-      this.$router.push({ name: "Home" });
-    }
+        })  
   },
+
 
 computed: {
   filterProducts: function() {

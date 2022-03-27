@@ -1,4 +1,5 @@
 <template>
+<div id="si">
   
 <div class="signup-form">
     <form @submit.prevent="signup">
@@ -21,6 +22,7 @@
         </div>
     </form>
 	<div class="text-center">Already have an account? <router-link to="/login">Sign in</router-link>
+</div>
 </div>
 </div>
 
@@ -53,7 +55,7 @@ methods: {
 		.then((response) => response.json())
 		.then((json) => console.log(json));
 		this.msg = `${ this.name } Registered Successfuly`;
-		// alert("Logging in..");
+		alert("Registering..");
 		this.$router.push({ name: "Products"});
 	},
 },
@@ -63,9 +65,15 @@ methods: {
 </script>
 
 <style>
+ 
+  
+     #si{
+		 background-color: #221f1d;
+	 }
+     
 
 	body{
-		color: rgb(104, 31, 31);
+		color: rgb(63, 19, 19) !important;
 		background: #6fa2e9;
 		font-family: 'Roboto', sans-serif;
 	}
@@ -153,6 +161,9 @@ methods: {
 	.signup-form form a:hover{
 		text-decoration: underline;
 	}  
+	.text-center{
+		color: #fff;
+	}
 </style>
 
 

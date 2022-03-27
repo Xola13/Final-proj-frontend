@@ -29,7 +29,7 @@
         <li><router-link :to="{ name: 'Cart'}">
 			<i class="fa fa-shopping-cart" style="font-size:20px"></i>
 			</router-link></li>
-         <li><router-link :to="{ name: 'Profile' }"><i class="fa fa-user"></i>Profile</router-link>
+         <li><router-link to="#"><i class="fa fa-user"></i>Profile</router-link>
           <ul class="navbar__sublinks">
             <!-- <li><router-link to="/signup">Sign up</router-link></li> -->
 			<div v-if="this.loggedin !== true">
