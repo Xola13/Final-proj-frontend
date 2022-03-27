@@ -24,12 +24,12 @@ export default {
     
 } 
 .btn{
-  justify-items: center;
-  position: fixed;
-  float: bottom;
+  
+ margin:0px !important;
+  left: 700px !important;
   top: 40%;
-  color: rgb(213, 214, 214);
-  background-color: rgb(241, 240, 231);
+  position: absolute !important;
+  background-color: rgb(71, 58, 15);
 }
 
 
