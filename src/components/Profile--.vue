@@ -1,9 +1,10 @@
 <template>
   
+  <div class="con">
 <div class="wrapper">
     <div class="left">
-        <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="100">
-        <h4> {{ users.name }}</h4>
+        <img :src="user.img" alt="user" width="100">
+        <h4> {{ user.name }}</h4>
          
     </div>
     <div class="right">
@@ -20,7 +21,8 @@
               </div>
             </div>
         </div>
-      
+       </div>
+       </div>
        <div class="mt-6 text-center">
               <button
                 data-bs-toggle="modal"
@@ -41,9 +43,9 @@
               </button>
             </div>
 
-         </div>
+  </div>
           
-        </div>
+        
 
 
        <!-- Modal -->
@@ -81,8 +83,18 @@ components: {
 
 data() {
     return{
-      users: "",
+      
+      user: "",
       email: "",
+
+
+      id: localStorage.getItem("id"),
+
+      name: localStorage.getItem("name"),
+      email: localStorage.getItem("email"),
+      contact: localStorage.getItem("contact"),
+
+      
     };
 },
 
@@ -195,6 +207,7 @@ body{
   border-bottom-left-radius: 5px;
   text-align: center;
   color: #fff;
+  
 }
 
 .wrapper .left img{

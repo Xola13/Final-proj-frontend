@@ -18,6 +18,7 @@
 
       <ul class="navbar__links">
         <li><router-link to="/">Home</router-link></li>
+		<li><router-link to="/about">About</router-link></li>
         <li><router-link to="#">Connections</router-link>
           <ul class="navbar__sublinks">
             <li><router-link to="/admin">Admin</router-link></li>
@@ -29,21 +30,20 @@
         <li><router-link :to="{ name: 'Cart'}">
 			<i class="fa fa-shopping-cart" style="font-size:20px"></i>
 			</router-link></li>
-         <li><router-link to="#"><i class="fa fa-user"></i>Profile</router-link>
-          <ul class="navbar__sublinks">
-            <!-- <li><router-link to="/signup">Sign up</router-link></li> -->
-			<div v-if="this.loggedin !== true">
-				            <li><router-link to="/login">Log in</router-link></li>
-
-			</div>
-			<div v-else> 
-							 <li> <button @click="logout">Log out</button></li>
-
-             </div>
+			
+             <li class="nav-item dropdown rounded">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i>Profile</a>
+          <div class="dropdown-menu dropdown-menu-end" id="naav" aria-labelledby="navbarDropdown">
+            <router-link to="/profile"><a class="dropdown-item">Account</a></router-link>
+			<hr class="dropdown-divider">
+            <router-link to="/login"><li><a class="dropdown-item">Login</a></li></router-link>
             
-          </ul>
+              <hr class="dropdown-divider">
+            
+            <li><a class="dropdown-item" @click="logout">Logout</a></li>
+          </div>
         </li>
-        
+
       </ul>
     </div>
   </nav>
@@ -59,39 +59,15 @@
 
 export default {
 
-methods: {
-	logout() {
-        if (!localStorage.getItem("jwt")) {
-			alert("No user to logout!")
-			return this.$router.push({ name: "Home"});
-		}
-        else{
-			localStorage.clear();
-			this.loggedin = false
-			alert("user logged out");
-			this.$router.push({ name: "Home" });
-		}
-	},
+computed: {
+	 computed:{  logout(){
+    localStorage.clear();
+    alert("User logged out")
+    this.$router.push({ name: "Home"})
+
+  }}
 },
-//   mounted() {
-//     if(localStorage.getItem("jwt")){
-//       fetch("https://final-project-o.herokuapp.com/users/:id", {
-//       method: "GET",
-//       headers: {
-//         "Content-type": "application/json; charset=UTF-8",
-//         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((json) => {
-//         this.loggedin = true;
-//         this.isadmin = json.isadmin
-//       })
-//       .catch((err) => {
-//         alert(err);
-//       });
-//     }
-//   },
+
 
 }
 
@@ -99,8 +75,18 @@ methods: {
 </script>
 
 
-<style >
+<style scoped>
 
+.dropdown-divider{
+	color: aliceblue;
+}
+
+a{
+	padding-left: 3px !important;
+}
+#naav{
+	background-color: #110f0f;
+}
 
 * {
 	 box-sizing: border-box;
@@ -146,7 +132,7 @@ methods: {
 	 display: inline-block;
 	 width: 100px;
 	 height: 50px;
-	 background: #3f3f4d url('../assets/logo.png') no-repeat;
+	 background: url('../assets/logo.png') no-repeat;
 	 background-size: contain;
 	 margin-right: 15px;
 	 vertical-align: middle;

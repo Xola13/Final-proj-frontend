@@ -50,14 +50,7 @@ export default {
 
 
 
-//  mounted() {
-//    fetch("https://final-project-o.herokuapp.com/products/" + this.id)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         this.product = data;
-//         console.log(this.product);
-//       });
-// },
+
 
   methods: {
 
@@ -272,94 +265,6 @@ span {
   color: #335d2d;
 }
 
-
-
-
-/*  */
- /* .wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    display: flex;
-    padding-top: 90px;
-}
-
-.card {
-  margin: 22px;
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.418);
-  border-bottom-right-radius: 44px;
-  border-bottom-left-radius: 44px;
-  border-top-right-radius: 44px;
-  border-top-left-radius: 44px;
-  position: relative;
-  transition: 0.5s ease-in-out;
-}
-
-.card:hover{
-    transform: translateY(15px);
-}
-
-.card:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 254px;
-    background: var(--color-navy);
-    border-top-right-radius: 44px;
-    border-top-left-radius: 44px;
-    transition: 0.5s all;
-    opacity: 0;
-
-}
-
-.card:hover::before {
-    opacity: 1;
-}
-
-
-.card__imagen{
-    width: 100%;
-    height: 100px;
-}
-
-.card__imagen > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card__info {
-    font-size: 0.8rem;
-    font-family: var(--font-sans);
-    padding: 1rem 3rem 0rem 3rem;
-    width: 100%;
-    height: 10rem;
-    line-height: 1.5;
-    background-color: var(--color-navy-opaque);
-    color: var(--color-light);
-    border-bottom-right-radius: 44px;
-    border-bottom-left-radius: 44px;
-}
-
-.card__info p{
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.button {
-    font-style: var(--font-sans);
-    text-decoration: none;
-    color: var(--color-light);
-    background-color: black;
-    padding: 0.6em 4em;
-    border-radius: 15px;
-    font-weight: bold;
-    margin-bottom: 1em;
-}  */
 
 
 </style>

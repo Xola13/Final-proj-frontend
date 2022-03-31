@@ -6,16 +6,16 @@
 		<h2>Create Free Account</h2>
 		<p class="hint-text">It's FREE and takes a minute.</p>
         <div class="form-group">
-            <input type="text" class="form-control" name="name" placeholder="Username" required="required">
+            <input type="text" class="form-control" v-model="name" placeholder="Username" required="required">
         </div> 
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        	<input type="email" class="form-control" v-model="email" placeholder="Email" required="required">
         </div>
 		<div class="form-group">
-            <input type="text" class="form-control" name="contact" placeholder="Contact" required="required">
+            <input type="text" class="form-control" v-model="contact" placeholder="Contact" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control" v-model="password" placeholder="Password" required="required">
         </div>        
 		<div class="form-group">
             <button type="submit" class="btn3 btn-success btn-lg btn-block">Register Now</button>
@@ -38,28 +38,31 @@ data() {
 		contact: ""
 	}
 },
-methods: {
-	signup() {
-		fetch("https://final-project-o.herokuapp.com/users", {
-			method: "POST",
-			body: JSON.stringify({
-				name: this.name,
-				email: this.email,
-				contact: this.contact,
-				password: this.password,
-			}),
-			headers: {
-				"Content-type": "application/json; charset=UTF-8",
-			},
-		})
-		.then((response) => response.json())
-		.then((json) => console.log(json));
-		this.msg = `${ this.name } Registered Successfuly`;
-		alert("Registering..");
-		this.$router.push({ name: "Products"});
-	},
-},
+   methods: {
+    signup() {
+         fetch('https://final-project-o.herokuapp.com/users', {
+  method: 'POST',
+  body: JSON.stringify({
+    email:this.email,
+    password:this.password,
+    name: this.name,
+    contact: this.contact,
+   
+  }),
 
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((res) => res.json())
+  .then((user) => {
+    console.log(user);
+    alert("User registered");
+    localStorage.getItem("jwt", user.jwt);
+    this.$router.push({ name: "Login"})
+  })
+    },
+  },
 
 }
 </script>

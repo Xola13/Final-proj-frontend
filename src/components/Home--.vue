@@ -26,7 +26,7 @@ export default {
 .btn{
   
  margin:0px !important;
-  left: 700px !important;
+  left: 910px !important;
   top: 40%;
   position: absolute !important;
   background-color: rgb(71, 58, 15);

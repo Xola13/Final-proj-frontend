@@ -40,35 +40,45 @@ export default {
 
 
 methods: {	
-login() {
-	fetch("https://final-project-o.herokuapp.com/users", {
-		method: "PATCH",
-		body: JSON.stringify({
-			email: this.email,
-			password: this.password,
-		}),
-		headers: {
-			"Content-type": "application/json; charset=UTF-8",
-		},
-	})
-	.then((response) => response.json())
-	.then((json) => {
-	   if(json.access_token){
-		localStorage.setItem("jwt", json.access_token);
-	   }
-		console.log(json.access_token)
-		if(localStorage.getItem("jwt")) {
-		alert("Logging in..");
-		this.$router.push({ name: "Cart"});
-		}
-		else {
-			alert("Wrong Credentials")
-		}
-	})
-	.catch((err) => {
-		alert(err);
-	});
-},
+   login() {
+        const user = {
+            email: this.email,
+            password: this.password,
+          }
+          console.log(user)
+        fetch("https://final-project-o.herokuapp.com/users", {
+          method: "PATCH",
+          body: JSON.stringify(user),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((json) => {
+                console.log(user.name);
+				localStorage.setItem("jwt", user.jwt);
+				localStorage.setItem("id", user._id);
+				localStorage.setItem("name", user.name);
+				localStorage.setItem("email", user.email);
+				localStorage.setItem("contact", user.contact);
+
+			  if(json.jwt){
+            localStorage.setItem("jwt", json.jwt);
+			  }
+            console.log("jwt", json)
+           if(localStorage.getItem("jwt")) {
+            alert("Logging in...");
+			 this.$router.push({ name: "Cart" });
+		   }
+		   else {
+			   alert("Wrong Credentials")
+		   }
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      
+    },
 },
 }
 </script>
@@ -90,23 +100,7 @@ login() {
 }
 
 
-/* html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
-} */
+
 body {
 	background-image: url("../assets/clockk.jpg") !important;
 	color: #000;
